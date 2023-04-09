@@ -1,0 +1,93 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "yolov7 testing",
+            "type": "python",
+            "request": "launch",
+            "program": "test.py",
+            "console": "integratedTerminal",
+            "env": {
+                "DISPLAY": "192.168.1.46:0"
+            },
+            "args": [
+                "--data", "data/coco.yaml",
+                "--img", "640",
+                "--batch", "32",
+                "--conf", "0.001",
+                "--iou", "0.65",
+                "--device", "0",
+                "--weights", "runs/train/yolov7-03152/weights/best.pt",
+                "--name", "yolov7-0315-eval",
+            ],
+            "justMyCode": true
+        },
+        {
+            "name": "yolov7-people testing",
+            "type": "python",
+            "request": "launch",
+            "program": "test.py",
+            "console": "integratedTerminal",
+            "env": {
+                "DISPLAY": "192.168.1.46:0"
+            },
+            "args": [
+                "--data", "data/coco-people-94k.yaml",
+                "--img", "640",
+                "--batch", "32",
+                "--conf", "0.001",
+                "--iou", "0.65",
+                "--device", "0",
+                "--weights", "runs/train/yolov7-people7/weights/best.pt",
+                "--name", "yolov7-people7.1-eval",
+            ],
+            "justMyCode": true
+        },
+        {
+            "name": "yolov7-people detect",
+            "type": "python",
+            "request": "launch",
+            "program": "detect.py",
+            "console": "integratedTerminal",
+            "env": {
+                "DISPLAY": "192.168.1.46:0"
+            },
+            "args": [
+                "--img-size", "640",
+                "--conf", "0.4",
+                "--device", "0",
+                "--weights", "runs/train/yolov7-people5/weights/best.pt",
+                "--name", "yolov7-people5-best-detect",
+            ],
+            "justMyCode": true
+        },
+        {
+            "name": "yolov7 train people only",
+            "type": "python",
+            "request": "launch",
+            "program": "train.py",
+            // "console": "integratedTerminal",
+            "console": "externalTerminal",
+            "env": {
+                "DISPLAY": "192.168.1.46:0"
+            },
+            "args": [
+                "--workers", "16",
+                "--device", "0",
+                "--batch-size", "32",
+                "--data", "data/coco-people.yaml",
+                "--img", "640", "640",
+                "--cfg", "cfg/training/yolov7-tiny-people.yaml",
+                "--weights", "''",
+                "--name", "yolov7-people",
+                "--hyp", "data/hyp.scratch.p5.yaml",
+                "--epochs", "50",
+                "--save_period", "1",
+            ],
+            "justMyCode": true
+        },
+    ]
+}
